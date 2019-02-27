@@ -93,12 +93,22 @@ GLuint loadTarga(const char* filename)
     fclose(file);
 
     GLuint texture_id = 0;
-    
+
     // TODO: THIS IS THE PART YOU SHOULD CHANGE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Ha!!!!!!!!!
     //glGenTextures
+    glGenTextures(1, &texture_id);
     //glBindTexture
+    glBindTexture(GL_TEXTURE_2D, texture_id);
     //glTexParameteri
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     //glTexImage2D
+    glTexImage2D(GL_TEXTURE_2D, 0,GL_RGB, width, height, 0, GL_BGR, GL_UNSIGNED_BYTE, data);
+
+// Give the image to OpenGL
+
+
+
 
     return texture_id;
 }
