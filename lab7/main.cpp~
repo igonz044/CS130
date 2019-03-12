@@ -23,18 +23,13 @@ const int WINDOW_HEIGHT = 800;
 vector<vec2> mouseCoord;
 float factorial(int n)
 {
-  float a =1; 
-  for (int i =1 ; i<=n ; i++) 
-    {
-      a*=i;
-    }
- return a;
- 
+  if (n >1) { return n*factorial(n-1);}
+  else { return 1;}
 }
 
 float combination(int n, int k)
 {
-  return factorial(n)/(factorial(k)*factorial(n-k));
+  return factorial(n)/factorial(k)*factorial(n-k);
 }
 
 float binomial(int n, int k, float t)
@@ -66,22 +61,21 @@ void GL_render()
     //glFlush();
 
     glBegin(GL_LINE_STRIP);
-{
+
     //vec2 b(0,0);
 
-    for(float t = 0.0; t < 1.0; t+=0.01)
+    for(float t = 0; t < 1; t+=0.01)
     {
       vec2 b;
-      for(unsigned j = 0; j < mouseCoord.size(); j++)
+      for(int j = 0; j < mouseCoord.size(); j++)
       {
         b += binomial(mouseCoord.size()-1,j, t)*mouseCoord.at(j);
 
       }
       glColor3f(1.0f,0.0f,0.0f);
       glVertex2f(b[0],b[1]);
-    }}
+    }
     glEnd();
-    glFlush();
 }
 
 void GL_mouse(int button,int state,int x,int y)
@@ -127,5 +121,3 @@ int main(int argc, char** argv)
     glutMainLoop();
     return 0;
 }
-
-
